@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card card border-0 shadow-sm"><div class="card-body p-4 p-md-5">
+  <div class="brand-mark mb-3">▦</div><h1 class="h3 fw-bold">Create your workspace</h1><p class="text-secondary mb-4">Start tracking your products in a few steps.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3"><label class="form-label" for="organization_name">Organization name</label><input class="form-control" id="organization_name" name="organization_name" required maxlength="120" value="{{ request.form.get('organization_name','') }}" placeholder="My Test Store"></div>
+    <div class="mb-3"><label class="form-label" for="email">Email address</label><input class="form-control" id="email" name="email" type="email" autocomplete="email" required maxlength="255" value="{{ request.form.get('email','') }}" placeholder="you@example.com"></div>
+    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" id="password" name="password" type="password" autocomplete="new-password" minlength="8" required><div class="form-text">Use at least 8 characters.</div></div>
+    <div class="mb-4"><label class="form-label" for="confirm_password">Confirm password</label><input class="form-control" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="8" required></div>
+    <button class="btn btn-primary btn-lg w-100" type="submit">Create account</button>
+  </form><p class="text-center text-secondary mt-4 mb-0">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+</div></div></div>
+{% endblock %}

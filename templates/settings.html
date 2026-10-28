@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="mb-4"><p class="eyebrow mb-1">WORKSPACE</p><h1 class="page-title">Settings</h1><p class="text-secondary mb-0">Adjust the default stock level for your organization.</p></div>
+<div class="content-card form-card"><form method="post" class="p-4 p-md-5"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><div class="mb-4"><label class="form-label" for="organization_name">Organization</label><input class="form-control" id="organization_name" value="{{ organization.name }}" disabled><div class="form-text">Organization name is set during signup in this MVP.</div></div><div class="mb-4"><label class="form-label" for="default_low_stock_threshold">Default low-stock threshold</label><input class="form-control" id="default_low_stock_threshold" name="default_low_stock_threshold" type="number" min="0" max="1000000" step="1" required value="{{ request.form.get('default_low_stock_threshold', organization.default_low_stock_threshold) }}"><div class="form-text">Products without their own threshold use this value. A product is low stock when its quantity is less than or equal to this number.</div></div><button class="btn btn-primary" type="submit">Save settings</button></form></div>
+{% endblock %}

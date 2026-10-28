@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4"><div><p class="eyebrow mb-1">OVERVIEW</p><h1 class="page-title">Good to see you.</h1><p class="text-secondary mb-0">Here is the current picture of {{ current_user.organization.name }} inventory.</p></div><a class="btn btn-primary" href="{{ url_for('create_product') }}">＋ Add product</a></div>
+<div class="row g-3 mb-4">
+  <div class="col-md-6"><div class="metric-card"><div class="metric-label">Total products</div><div class="metric-number">{{ total_products }}</div><div class="metric-foot">Unique products in your catalog</div></div></div>
+  <div class="col-md-6"><div class="metric-card"><div class="metric-label">Units in stock</div><div class="metric-number">{{ total_quantity }}</div><div class="metric-foot">Combined quantity across all products</div></div></div>
+</div>
+<div class="content-card"><div class="d-flex flex-wrap justify-content-between align-items-center gap-2 p-4 border-bottom"><div><h2 class="h5 fw-bold mb-1">Low-stock items</h2><p class="text-secondary small mb-0">Products at or below their stock threshold.</p></div><a href="{{ url_for('products') }}" class="btn btn-light btn-sm">View all products</a></div>
+  {% if low_stock_products %}<div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Product</th><th>SKU</th><th>Quantity</th><th>Threshold</th><th></th></tr></thead><tbody>{% for product in low_stock_products %}<tr><td class="fw-semibold">{{ product.name }}</td><td><span class="sku-pill">{{ product.sku }}</span></td><td><span class="badge text-bg-danger">{{ product.quantity }} left</span></td><td>{{ product.effective_threshold }}</td><td class="text-end"><a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_product', product_id=product.id) }}">Update</a></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><div class="empty-icon">✓</div><h3 class="h6 fw-bold">Everything looks healthy</h3><p class="text-secondary mb-0">No products are currently at or below their low-stock threshold.</p></div>{% endif %}
+</div>
+{% endblock %}

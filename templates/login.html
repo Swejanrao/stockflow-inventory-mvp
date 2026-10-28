@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card card border-0 shadow-sm"><div class="card-body p-4 p-md-5">
+  <div class="brand-mark mb-3">▦</div><h1 class="h3 fw-bold">Welcome back</h1><p class="text-secondary mb-4">Log in to manage your inventory.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3"><label class="form-label" for="email">Email address</label><input class="form-control form-control-lg" id="email" name="email" type="email" autocomplete="email" required maxlength="255" value="{{ request.form.get('email','') }}"></div>
+    <div class="mb-4"><label class="form-label" for="password">Password</label><input class="form-control form-control-lg" id="password" name="password" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-primary btn-lg w-100" type="submit">Log in</button>
+  </form><p class="text-center text-secondary mt-4 mb-0">New to StockFlow? <a href="{{ url_for('signup') }}">Create an account</a></p>
+</div></div></div>
+{% endblock %}
